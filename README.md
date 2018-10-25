@@ -51,7 +51,7 @@ Add Table : pesapal_txn
 To install the API and start using follow the procedure above by coping the files as directed, then follwo the steps below. <br />
 
 <b>Step One</b><br />
-<b>A:</b>Prepair the html form which you will use to collect details from the customer. <br />
+<b>A:</b> Prepair the html form which you will use to collect details from the customer. <br />
 -- The API uses form <i>index.php</i> found in views/pesapal <br /> 
 -- The request is called using the <b>index()</b> function found in controller <b>PayPesaPal</b> <br />
 -- You can access the form direct or by using route <b><i>checkout</i></b> <br />
@@ -91,7 +91,7 @@ $this->load->view('pesapal/paynow',$data);
 ```
 
 <b>Step Three</b><br />
-On the view <b>paynow</b> you will see the <b>PesaPal<b> payment iFrame appear in a position depending with your <b>CSS</b> customization. <br />
+On the view <b>paynow</b> you will see the <b>PesaPal</b> payment iFrame appear in a position depending with your <b>CSS</b> customization. <br />
 - If you get an error and the <b>PesaPal</b> Form doesn't appear, kindly check your <b><i>consumer_key, consumer_secret, iframelink, callback_url and OAuth.php </i></b> if they are well linked. <br /> <br />
 
 - Generate the Payment confirmantion code from: https://demo.pesapal.com/dashboard/my/mobilemoneytest <br />
@@ -117,63 +117,59 @@ Once the Data is saved, the function will take the user to 'Payment Complete Pag
 <b>NB:</b> Kindly note this process means the payment has been sent to PesaPal. But incase of DEBIT / CREDIT cards the card charging process can be rejected hence the payment will be incomplete. <br />
 That is why in this step our <b>txn_status is set to 'WAITING'</b> and <b>txn_ipn_date, notification_type are 'NULL'</b> <br />
 
+<b>Step Four (IPN)</b><br />
+<b>A:</b> By now you must have set-up the IPN urls form you developer account / business account back-end. If not yet set up from your <b> IPN Settings</b> menu under Account Settings. <br />
 
+- Example of IPN settings details
 ```
-until finished
+Web Domain:
+www.yourhost.com
+
+IPN Listener URL:
+https://www.yourhost.com/pesapal/response
 ```
+- Once <b>step three</b> is over it will take 60sec for pesapal to confirm if the payment was received successful, and if it's true the IPN urs <b><i>https://www.yourhost.com/pesapal/response</i></b> which will access controller <b>PayPesaPal/ipn</b> will be triggered.
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
+<b>B:</b> Set-up the <b>consumer_key and consumer_secret </b> as how you did in <b>STEP TWO</b> then add
 ```
-Give an example
+$statusrequestAPI = 'https://demo.pesapal.com/api/querypaymentstatus';
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
+- Remember to change to:
 ```
-Give an example
+https://www.pesapal.com/api/querypaymentstatus' when you are ready to go live!
 ```
 
-## Deployment
+- On this step is were we will find out if the payment process completed successful. We will update the payment with variable <b>$status</b>. <br />
 
-Add additional notes about how to deploy this on a live system
+- Set value <b>txn_ipn_date, notification_type, txn_status and flag </b> <br />
+- The <b>txn_status = 'PAID'</b> and <b> flag = 1 </b> this is to indicate that the IPN call was initiated successful. <br />
+- Once this is done the <b> notification_type </b> will be set to <b>'COMPLETE'</b>
+
+<b>Step Five</b><br />
+From there you can query values from the table and indicate to the Admin dashboard if the product purchase and payment was successful (This page is not provided with this API, you can develop it and access the data from the <i>pesapal_txn</i> or your prefered table)
+
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Codeigniter](https://codeigniter.com/) - The PHP framework used
+* [PHP](http://php.net/) - PHP Language
+* [MYSQL](https://www.mysql.com/) - MySQL Database
+* [PesaPal](https://pesapal.com/) - PesaPal Payment API
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please feel free to contribute, contact me via email.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We will update the API for better code flow or when <b>PesaPal</b> update ther API 
 
-## Authors
+## Author
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Josh L Minga** - *Initial work* - [Josh](https://github.com/joshlminga)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
