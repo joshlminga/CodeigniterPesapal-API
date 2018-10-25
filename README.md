@@ -51,8 +51,8 @@ Add Table : pesapal_txn
 To install the API and start using follow the procedure above by coping the files as directed, then follwo the steps below. <br />
 
 <b>Step One</b><br />
-b>A:</b>Prepair the html form which you will use to collect details from the customer. <br />
--- The API uses form <i>index.php</> found in views/pesapal <br /> 
+<b>A:</b>Prepair the html form which you will use to collect details from the customer. <br />
+-- The API uses form <i>index.php</i> found in views/pesapal <br /> 
 -- The request is called using the <b>index()</b> function found in controller <b>PayPesaPal</b> <br />
 -- You can access the form direct or by using route <b><i>checkout</i></b> <br />
 <i> more on route, url and forms read codeigniter documentation </i> https://www.codeigniter.com/user_guide/  <br />
