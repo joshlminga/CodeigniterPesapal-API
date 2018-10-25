@@ -20,12 +20,31 @@ This project is based from offical Pesapal <b>PostPesapalDirectOrderV4</b> in or
 More can be found here : http://developer.pesapal.com/how-to-integrate/php-sample <br />
 Document and reference : http://developer.pesapal.com/how-to-integrate/samples-downloads <br />
 
-
-
-What things you need to install the software and how to install them
+Download the file from this repositories and copy them to your existng roject
 
 ```
-Give examples
+Application Folder Add in
+  Config Folder
+  | route.php 
+     -- add
+     $route['checkout'] = 'PayPesaPal'; //Buy
+     $route['buygoods'] = 'PayPesaPal/buyproducts';
+     $route['pesapal/pay'] = 'PayPesaPal/paynow';
+     $route['pesapal/paid'] = 'PayPesaPal/paid';
+     $route['pesapal/response'] = 'PayPesaPal/ipn';
+
+  Controller Folder
+  | PayPesaPal.php
+
+  Libraries Folder
+  | Pesapal.php
+  | Create Folder -> PesaPalFile
+    | Authentication.php
+    | OAuth.php
+
+Add Table : pesapal_txn 
+- using file pesapal_txn.sql
+
 ```
 
 ### Installing
