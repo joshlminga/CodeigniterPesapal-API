@@ -57,7 +57,8 @@ To install the API and start using follow the procedure above by coping the file
 -- You can access the form direct or by using route <b><i>checkout</i></b> <br />
 <i> more on route, url and forms read codeigniter documentation </i> https://www.codeigniter.com/user_guide/  <br />
 
-<b>B:</b> Submit the form data to Controller <b>PayPesaPal/buyproducts</b> optional use route <b><i>buygoods</i></b> <br />
+<b>Step Two</b><br />
+<b>A:</b> Submit the form data to Controller <b>PayPesaPal/buyproducts</b> optional use route <b><i>buygoods</i></b> <br />
  
 Take all value passed from the checkout form and pass them to <b>paynow function</b> <br />
 - Change the access keys to those given to you from the PesaPal account dashboard<br />
@@ -65,6 +66,58 @@ Take all value passed from the checkout form and pass them to <b>paynow function
 $consumer_key = 'Your PesaPal Merchant Consumer Key'; 
 $consumer_secret = 'Your PesaPal Merchant Consumer Secret';
 ```
+Add the <b>iframelink</b>
+```
+$iframelink = 'https://demo.pesapal.com/api/PostPesapalDirectOrderV4';
+```
+<b>NB:</b> Remember this changes to 
+```
+$iframelink = 'https://www.pesapal.com/API/PostPesapalDirectOrderV4';
+```
+Once the project is on the live server (Production Phase) <br />
+Set-up the values Amount,Description,Names,Email et.c <br />
+
+Then add the <b>callback_url</b> 
+```
+$callback_url = 'https://www.yourhost.com/pesapal/paid'; //redirect url, the page that will handle the response from pesapal.
+```
+
+The populated iFrame will appear in view <b>paynow</b> and is passed via <b>$data</b> array
+```
+$data['iframe_src'] = $iframe_src;
+
+//View
+$this->load->view('pesapal/paynow',$data);
+```
+
+<b>Step Three</b><br />
+On the view <b>paynow</b> you will see the <b>PesaPal<b> payment iFrame appear in a position depending with your <b>CSS</b> customization. <br />
+- If you get an error and the <b>PesaPal</b> Form doesn't appear, kindly check your <b><i>consumer_key, consumer_secret, iframelink, callback_url and OAuth.php </i></b> if they are well linked. <br /> <br />
+
+- Generate the Payment confirmantion code from: https://demo.pesapal.com/dashboard/my/mobilemoneytest <br />
+- Once you input and click <b>Complete Buttom</b> the payment will be handled to PesaPal and the receival confirmantion will be sent to the <b>callback_url = https://www.yourhost.com/pesapal/paid</b> <br />
+- That will take the request to <b>function paid</b>. There you can define your TimeZone if you wish (place this code above variable $dateTime) <br />
+```
+date_default_timezone_set('Your Time Zone');
+$dateTime =  date('Y-m-d, H:i:s');
+```
+Pesapal will pass to our function values <b> reference and pesapal_tracking_id </b> <br />
+```
+$reference = $_GET['pesapal_merchant_reference']; // This is our order ID
+$pesapal_tracking_id = $_GET['pesapal_transaction_tracking_id']; // PesaPal Payment Reference ID
+```
+
+All values will be stored in table <b> pesapal_txn </b> which is declared at the top before the <b>constructer</b>
+```
+ private $TXNtable = 'pesapal_txn'; //TXN Table
+```
+
+Once the Data is saved, the function will take the user to 'Payment Complete Page which can be called by <b>function success() </b> <br />
+
+<b>NB:</b> Kindly note this process means the payment has been sent to PesaPal. But incase of DEBIT / CREDIT cards the card charging process can be rejected hence the payment will be incomplete. <br />
+That is why in this step our <b>txn_status is set to 'WAITING'</b> and <b>txn_ipn_date, notification_type are 'NULL'</b> <br />
+
+
 ```
 until finished
 ```
