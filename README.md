@@ -162,7 +162,7 @@ Please feel free to contribute, contact me via email.
 
 ## Versioning
 
-We will update the API for better code flow or when <b>PesaPal</b> update ther API 
+We will update the API for better code flow or when <b>PesaPal</b> update their API 
 
 ## Author
 
