@@ -3,15 +3,16 @@
 This is PesaPal Payment API with IPN (Instant Payment Notification) based on PHP programming languange, developed using Codeigniter 3 PHP Framework.  
 
 ## Getting Started
-Inorder to use this API you need to have:
+In order to use this API you need to have:
 
 1- Knowledge of PHP Programming Language. <br />
 2- Understanding of Codeigniter PHP Framework (Mostly MVC) concepts. <br />
 3- Pesapal Developer account/Actual Business Account (Sign up here:  http://developer.pesapal.com/ or http://www.pesapal.com/). <br />
-4- Environment to run the Project. <br />
+4- Codeigniter Core Framework / Codeigniter Project. <br />
 
 ### Prerequisites
 
+This project is based from offical Pesapal <b>PostPesapalDirectOrderV4</b>
 What things you need to install the software and how to install them
 
 ```
