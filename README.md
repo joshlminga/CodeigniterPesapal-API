@@ -39,7 +39,6 @@ Application Folder Add in
   Libraries Folder
   | Pesapal.php
   | Create Folder -> PesaPalFile
-    | Authentication.php
     | OAuth.php
 
 Add Table : pesapal_txn 
@@ -49,16 +48,23 @@ Add Table : pesapal_txn
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+To install the API and start using follow the procedure above by coping the files as directed, then follwo the steps below. <br />
 
-Say what the step will be
+<b>Step One</b><br />
+b>A:</b>Prepair the html form which you will use to collect details from the customer. <br />
+-- The API uses form <i>index.php</> found in views/pesapal <br /> 
+-- The request is called using the <b>index()</b> function found in controller <b>PayPesaPal</b> <br />
+-- You can access the form direct or by using route <b><i>checkout</i></b> <br />
+<i> more on route, url and forms read codeigniter documentation </i> https://www.codeigniter.com/user_guide/  <br />
 
+<b>B:</b> Submit the form data to Controller <b>PayPesaPal/buyproducts</b> optional use route <b><i>buygoods</i></b> <br />
+ 
+Take all value passed from the checkout form and pass them to <b>paynow function</b> <br />
+- Change the access keys to those given to you from the PesaPal account dashboard<br />
 ```
-Give the example
+$consumer_key = 'Your PesaPal Merchant Consumer Key'; 
+$consumer_secret = 'Your PesaPal Merchant Consumer Secret';
 ```
-
-And repeat
-
 ```
 until finished
 ```
