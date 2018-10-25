@@ -12,7 +12,16 @@ In order to use this API you need to have:
 
 ### Prerequisites
 
-This project is based from offical Pesapal <b>PostPesapalDirectOrderV4</b>
+This project is based from offical Pesapal <b>PostPesapalDirectOrderV4</b> in order to use the API you need: <br>
+1- <b>consumer_key</b> – merchant key issued by PesaPal to the merchant <br />
+2- <b>consumer_secret</b> – merchant secret issued by PesaPal to the merchant <br />
+3- <b>Oauth.php File </b> - Download and rename in to <b>.php</b> or use the one come with the API
+
+More can be found here : http://developer.pesapal.com/how-to-integrate/php-sample <br />
+Document and reference : http://developer.pesapal.com/how-to-integrate/samples-downloads <br />
+
+
+
 What things you need to install the software and how to install them
 
 ```
